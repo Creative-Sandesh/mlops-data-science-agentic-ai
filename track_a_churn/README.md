@@ -1,17 +1,31 @@
-# Track A - Data Science MLOps (Telco Customer Churn)
+# 📉 Track A · Customer Churn MLOps
 
-MLOps applied to a churn classifier: **uv** (reproducible env) -> **MLflow** (tracking + model registry)
--> **FastAPI** (serving) -> **Evidently AI** (drift monitoring) -> **Airflow** DAG (optional bonus, retraining trigger).
+**Train six models. Promote the best one. Serve predictions. Detect drift before it goes unnoticed.**
 
-Dataset: IBM Telco Customer Churn (same data as Kaggle `blastchar/telco-customer-churn`), 7,043 customers,
-target `Churn` (26.5% positive). `src/get_data.py` downloads it from IBM's public GitHub mirror; the CSV is also committed.
+![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![Models](https://img.shields.io/badge/candidates-6-0194E2)
+![Best F1](https://img.shields.io/badge/best%20F1-0.6599-2EA043)
+![Tests](https://img.shields.io/badge/tests-4%20passing-2EA043)
 
+[← Project overview](../README.md) · [Quick start](#quick-start) · [Experiments](#experiment-tracking) · [Drift](#monitoring-and-drift) · [Results](#deliverables-map)
+
+The project uses the IBM Telco Customer Churn data: **7,043 customers**, with `Churn` as the target (26.5% positive). The CSV is committed; [`get_data.py`](src/get_data.py) can also download it from IBM's public GitHub mirror. The workflow combines **uv**, **MLflow**, **FastAPI**, **Evidently**, and an optional **Airflow** DAG.
+
+```mermaid
+flowchart LR
+    A["Telco data"] --> B["Train 6 models"]
+    B --> C["Compare in MLflow"]
+    C --> D["Staging smoke test"]
+    D --> E["Production API"]
+    E --> F["Evidently drift checks"]
+    F -->|retrain recommended| B
 ```
-data -> training -> tracking -> registry -> serving -> monitoring -> retraining (if needed)
-        train.py    MLflow     register.py  serve.py    monitor.py   Airflow DAG / train.py
-```
 
-## Quick start (one command)
+| Data | Saved winner | Saved drift outcome |
+| --- | --- | --- |
+| 7,043 customers · 70/30 reference/current split | `logreg_C1.0` · F1 **0.6599** · ROC AUC **0.8614** | Clean: no retrain · Synthetic drift: retrain recommended |
+
+## Quick start
 
 ```bash
 cd track_a_churn
@@ -47,7 +61,7 @@ Individual steps: `src/train.py`, `src/compare.py`, `src/register.py`, `src/moni
 
 ---
 
-## a. Environment & reproducibility (uv)
+## Environment and reproducibility
 
 Problems uv solved **in this project** (all hit while building it):
 
@@ -62,11 +76,11 @@ Problems uv solved **in this project** (all hit while building it):
 4. **Wheel-heavy stack** (numpy 2.x, scikit-learn 1.9, xgboost 3.x, pandas): one lock file guarantees the same binaries everywhere.
 
 **One-command reproduction:** `uv sync && uv run python src/run_pipeline.py`.
-Verified from a clean copy of the tracked files (no `.venv`, `mlflow.db`, `mlartifacts/`): see [Verification](#verification).
+The committed CSV and lock file provide the inputs for a fresh run. See [Verification](#verification) for the checks performed in this workspace.
 
 ---
 
-## b. Experiment tracking strategy (MLflow)
+## Experiment tracking
 
 **Setup.** Reference data (random 70%, 4,930 rows) is what the model trains on; it is split again 80/20 stratified into
 train (3,944) and held-out test (986). The remaining 30% ("current") is never used for training. Store: SQLite
@@ -146,7 +160,7 @@ MLflow's built-in alternative also works: `mlflow models serve -m models:/churn-
 
 ---
 
-## c. Monitoring & drift strategy (Evidently AI)
+## Monitoring and drift
 
 **Reference vs current.** *Reference* = the 70% random sample the model was trained on ("training-time" data, 4,930 rows).
 *Current* = the other 30% (2,113 rows) standing in for incoming production data. Two scenarios are run against the reference:
@@ -207,7 +221,7 @@ gate step 2 (see the `churn_auto_retrain` variable).
 
 ---
 
-## d. Orchestration (Airflow bonus)
+## Orchestration
 
 `dags/churn_drift_dag.py`, DAG `churn_drift_monitoring`:
 
@@ -234,7 +248,7 @@ check_drift --> decide --+--> retrain_model --> promote_model
 |---|---|
 | uv: `pyproject.toml` + committed `uv.lock` | `pyproject.toml`, `uv.lock` |
 | MLflow run comparison for all >=3 models | table above, `reports/run_comparison.{md,csv,png}`, `reports/screenshots/mlflow_compare_runs.png` |
-| Registry stage transitions | `reports/registry_transitions.json`, section b |
+| Registry stage transitions | `reports/registry_transitions.json`, [Model Registry stage transitions](#model-registry-stage-transitions) |
 | Evidently HTML reports | `reports/evidently/*.html` (also MLflow artifacts under `churn-monitoring`) |
 | Airflow DAG (bonus) | `dags/churn_drift_dag.py` |
 | Serving | `src/serve.py` |
@@ -242,7 +256,7 @@ check_drift --> decide --+--> retrain_model --> promote_model
 
 ## Verification
 
-Clean-copy check and test results are recorded in the repository root README.
+The existing project environment ran `python -m pytest -q` on 19 October 2026: **4 passed**. The tests cover the data split, drift injection, and custom monitoring metrics. A fresh environment install and full pipeline rerun were not part of this check; the committed [reports](reports/) contain the earlier pipeline outputs.
 
 ## Limitations
 
