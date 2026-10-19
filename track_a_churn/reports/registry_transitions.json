@@ -1,0 +1,30 @@
+[
+  {
+    "time": "2026-09-26T17:01:04+00:00",
+    "event": "registered",
+    "model": "churn-classifier",
+    "version": 1,
+    "run": "logreg_C1.0",
+    "f1": 0.6599,
+    "roc_auc": 0.8614
+  },
+  {
+    "time": "2026-09-26T17:01:04+00:00",
+    "event": "transition",
+    "version": 1,
+    "to": "Staging"
+  },
+  {
+    "time": "2026-09-26T17:01:04+00:00",
+    "event": "smoke_test_passed",
+    "stage": "Staging",
+    "rows": 50
+  },
+  {
+    "time": "2026-09-26T17:01:04+00:00",
+    "event": "transition",
+    "version": 1,
+    "to": "Production",
+    "archived_previous_versions": true
+  }
+]

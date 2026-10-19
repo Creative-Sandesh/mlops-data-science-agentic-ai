@@ -1,0 +1,15 @@
+id,category,task_success,failure_reason,tool_ok,terminated_ok,iterations,n_parse_errors,tokens,latency_s,termination_reason
+q01,single_hop,False,missing_fact,True,True,2,0,2777,8.529,final_answer
+q02,single_hop,True,,True,True,2,0,2728,3.845,final_answer
+q03,single_hop,True,,True,True,2,0,2750,4.692,final_answer
+q04,single_hop,True,,True,True,2,0,2574,3.313,final_answer
+q05,multi_hop_calc,False,missing_fact,True,True,3,0,4619,9.163,final_answer
+q06,multi_hop_calc,False,missing_fact,True,True,3,0,4529,7.13,final_answer
+q07,multi_hop_calc,True,,False,True,2,0,2777,4.263,final_answer
+q08,multi_hop_calc,False,missing_fact,False,True,2,0,2746,4.222,final_answer
+q09,reasoning,False,missing_fact,True,True,2,0,2710,5.211,final_answer
+q10,reasoning,True,,True,True,2,0,2777,4.558,final_answer
+q11,tool_choice,True,,True,True,2,0,2272,3.408,final_answer
+q12,unanswerable,False,answered_instead_of_refusing,True,True,2,0,2730,4.378,final_answer
+q13,unanswerable,False,answered_instead_of_refusing,True,True,2,0,2791,4.008,final_answer
+q14,single_hop,True,,True,True,2,0,2734,3.914,final_answer

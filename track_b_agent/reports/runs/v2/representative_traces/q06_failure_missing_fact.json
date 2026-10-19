@@ -1,0 +1,57 @@
+{
+  "question": "A team of 10 people wants the Starter plan billed annually. What is the total yearly cost for the team?",
+  "prompt_version": "v2",
+  "final_answer": "The total yearly cost for the team is $1440.",
+  "iterations": 3,
+  "termination_reason": "final_answer",
+  "n_parse_errors": 0,
+  "tools_used": [
+    "search_docs",
+    "calculator"
+  ],
+  "prompt_tokens": 2166,
+  "completion_tokens": 179,
+  "latency_s": 11.66,
+  "steps": [
+    {
+      "step": 1,
+      "raw_output": "```json\n{\n\"thought\": \"Let's find out the cost of the Starter plan billed annually.\",\n\"action\": \"search_docs\",\n\"args\": {\"query\": \"Nimbus Cloud Starter plan cost annual\"}\n}\n```",
+      "thought": "Let's find out the cost of the Starter plan billed annually.",
+      "action": "search_docs",
+      "args": {
+        "query": "Nimbus Cloud Starter plan cost annual"
+      },
+      "result": "# Nimbus Cloud Platform - Pricing\n\nNimbus Cloud offers three plans.\n\nStarter costs $12 per user per month. It includes up to 5 projects, 10 GB of storage per user and community forum support.\n\nPro costs $29 per user per month. It includes unlimited projects, 100 GB of storage per user, priority email support and single sign-on (SSO).\n\nEnterprise has custom pricing with a minimum of 50 seats. It includes a 5 TB shared storage pool, 24/7 phone support, a dedicated account manager and audit logs.\n---\n# Nimbus Cloud Platform - Service Level Agreement (SLA)\n\nUptime commitments: the Pro plan is covered by a 99.9% monthly uptime SLA. The Enterprise plan is covered by a 99.99% monthly uptime SLA. The Starter plan has no SLA.\n\nService credits: if monthly uptime falls below the committed level but stays at or above 99.0%, the customer receives a credit of 10% of that month's fee. If uptime falls below 99.0%, the credit is 25% of that month's fee.\n---\n# Nimbus Cloud Platform - Data Regions and Security\n\nNimbus Cloud runs in three data regions: US-East (Virginia), EU-West (Ireland) and AP-South (Mumbai).\n\nPro and Enterprise customers can choose their region. Starter accounts are always hosted in US-East and cannot choose.\n\nMigrating an account between regions costs $0.02 per GB as a one-time fee; migration is free for Enterprise.",
+      "parse_error": null,
+      "latency_s": 3.418,
+      "tokens": 468
+    },
+    {
+      "step": 2,
+      "raw_output": "```json\n{\n\"thought\": \"Calculating the total yearly cost for a team of 10 people on the Starter plan.\",\n\"action\": \"calculator\",\n\"args\": {\"expression\": \"12 * 10 * 12\"}\n}\n```",
+      "thought": "Calculating the total yearly cost for a team of 10 people on the Starter plan.",
+      "action": "calculator",
+      "args": {
+        "expression": "12 * 10 * 12"
+      },
+      "result": "1440",
+      "parse_error": null,
+      "latency_s": 3.797,
+      "tokens": 889
+    },
+    {
+      "step": 3,
+      "raw_output": "```json\n{\n\"thought\": \"The total yearly cost for a team of 10 people on the Starter plan is $1440.\",\n\"action\": \"final_answer\",\n\"args\": {\"answer\": \"The total yearly cost for the team is $1440.\"}\n}\n```",
+      "thought": "The total yearly cost for a team of 10 people on the Starter plan is $1440.",
+      "action": "final_answer",
+      "args": {
+        "answer": "The total yearly cost for the team is $1440."
+      },
+      "result": "(loop terminated with final answer)",
+      "parse_error": null,
+      "latency_s": 4.419,
+      "tokens": 988
+    }
+  ],
+  "query_id": "q06"
+}

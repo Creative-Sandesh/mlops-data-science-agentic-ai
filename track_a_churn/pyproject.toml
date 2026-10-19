@@ -1,0 +1,34 @@
+[project]
+name = "churn-mlops"
+version = "0.1.0"
+description = "Track A - MLOps for a Telco churn classifier: uv, MLflow, Evidently AI, optional Airflow."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "evidently>=0.7,<0.8",
+    "fastapi>=0.141.1",
+    "matplotlib>=3.11.2",
+    # MLflow 2.x is pinned on purpose: the assignment asks for Model Registry *stages*
+    # (Staging -> Production), which MLflow 3 no longer supports.
+    "mlflow>=2.16,<3",
+    "numpy>=2.5.3",
+    "pandas>=2.3.3",
+    "requests>=2.34.2",
+    "scikit-learn>=1.9.1",
+    "sqlalchemy>=2.0,<2.1",
+    "tabulate>=0.10.0",
+    "uvicorn[standard]>=0.54.0",
+    "xgboost>=3.4.1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.uv]
+# Scripts live in src/ and are run directly (uv run python src/train.py); nothing to build.
+package = false
+link-mode = "copy"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

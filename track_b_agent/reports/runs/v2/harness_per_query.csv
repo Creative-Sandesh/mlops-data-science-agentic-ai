@@ -1,0 +1,15 @@
+id,category,task_success,failure_reason,tool_ok,terminated_ok,iterations,n_parse_errors,tokens,latency_s,termination_reason
+q01,single_hop,True,,True,True,2,0,1327,7.326,final_answer
+q02,single_hop,True,,True,True,2,0,1336,4.638,final_answer
+q03,single_hop,True,,True,True,2,0,1287,7.613,final_answer
+q04,single_hop,True,,True,True,2,0,1139,8.119,final_answer
+q05,multi_hop_calc,False,missing_fact,False,True,2,0,1347,7.149,final_answer
+q06,multi_hop_calc,False,missing_fact,True,True,3,0,2345,11.66,final_answer
+q07,multi_hop_calc,False,missing_fact,False,True,2,0,1038,9.042,final_answer
+q08,multi_hop_calc,False,missing_fact,False,True,2,0,1346,6.587,final_answer
+q09,reasoning,False,missing_fact,True,True,2,0,1245,8.066,final_answer
+q10,reasoning,True,,True,True,2,0,1327,8.715,final_answer
+q11,tool_choice,True,,True,True,2,0,991,6.705,final_answer
+q12,unanswerable,False,answered_instead_of_refusing,True,True,2,0,1319,6.502,final_answer
+q13,unanswerable,True,,True,True,2,0,1332,95.7,final_answer
+q14,single_hop,True,,True,True,2,0,1273,4.424,final_answer

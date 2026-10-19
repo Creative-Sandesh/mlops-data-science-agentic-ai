@@ -1,0 +1,62 @@
+{
+  "scenario": "drifted",
+  "checked_at": "2026-09-26T17:01:07+00:00",
+  "n_reference": 4930,
+  "n_current": 3896,
+  "drifted_columns": [
+    "Contract",
+    "MonthlyCharges",
+    "TotalCharges",
+    "tenure"
+  ],
+  "drifted_share": 0.2105,
+  "injected_columns_detected": [
+    "Contract",
+    "MonthlyCharges",
+    "tenure"
+  ],
+  "injected_columns_missed": [],
+  "side_effect_drifted_columns": [
+    "TotalCharges"
+  ],
+  "target_drift": {
+    "score": 0.1047,
+    "drifted": true,
+    "churn_rate_reference": 0.2696,
+    "churn_rate_current": 0.4094
+  },
+  "custom_metrics": {
+    "mean_monthly_charges_shift": 19.575,
+    "month_to_month_churn_shift_pp": 5.664,
+    "mean_tenure_shift": -12.842
+  },
+  "failed_tests": [
+    "Mean shift of 'MonthlyCharges' (current - reference): Less 5.000",
+    "Shift (pp) in Churn=Yes rate for Contract=Month-to-month (current - reference): Less 5.000"
+  ],
+  "model_performance": {
+    "reference": {
+      "accuracy": 0.7627,
+      "precision": 0.5379,
+      "recall": 0.8534,
+      "f1": 0.6599,
+      "roc_auc": 0.8614,
+      "predicted_churn_rate": 0.428,
+      "actual_churn_rate": 0.2698
+    },
+    "current": {
+      "accuracy": 0.6468,
+      "precision": 0.5504,
+      "recall": 0.7492,
+      "f1": 0.6346,
+      "roc_auc": 0.7297,
+      "predicted_churn_rate": 0.5572,
+      "actual_churn_rate": 0.4094
+    }
+  },
+  "retrain_recommended": true,
+  "reasons": [
+    "target 'Churn' drifted (score 0.105)",
+    "2 custom metric test(s) failed"
+  ]
+}

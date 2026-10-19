@@ -1,0 +1,63 @@
+# One entry per experiment run. Everything here is logged to MLflow as run parameters.
+# `note` records WHY the version exists (what trace evidence motivated it) and is logged as a tag.
+v1:
+  prompt_file: prompts/prompt_v1.txt
+  model: gemma:latest
+  temperature: 0.0
+  top_k: 3
+  chunk_size: 500
+  max_iterations: 4
+  lenient_json: false
+  note: "Baseline: minimal instruction prompt, strict JSON parsing."
+
+v2:
+  prompt_file: prompts/prompt_v2.txt
+  model: gemma:latest
+  temperature: 0.0
+  top_k: 3
+  chunk_size: 500
+  max_iterations: 4
+  lenient_json: true
+  note: "Response to v1 traces (14/14 replies fenced in ```json so strict parsing failed; model role-played several steps and fabricated observations; args given as plain strings): strict one-object output rules + exact args templates + never write Observations + answer only from observations; lenient parser keeps the first JSON object only."
+
+v3:
+  prompt_file: prompts/prompt_v3.txt
+  model: gemma:latest
+  temperature: 0.0
+  top_k: 5
+  chunk_size: 500
+  max_iterations: 6
+  lenient_json: true
+  note: "Response to v2 traces. Retrieval failures (q05/q06: the '20% annual discount' chunk was never in the top-3 observation) -> top_k 3->5 and a rule to search again for missing facts; max_iterations 4->6 to allow two searches + calculator. Reasoning failures with the fact in view (q08 answered the raw 600/min instead of x60; q09 picked the 10% tier for 98.5% uptime; q07 skipped search and fed invented constants to the calculator; q12 turned 'not mentioned' into 'does not offer') -> rules for derived values via calculator, explicit threshold comparison, calculator inputs only from observations, and absence-of-evidence = I don't know."
+
+v4:
+  prompt_file: prompts/prompt_v4.txt
+  model: gemma:latest
+  temperature: 0.0
+  top_k: 5
+  chunk_size: 500
+  max_iterations: 6
+  lenient_json: true
+  note: "Response to v3 traces. v3 fixed retrieval (q06 now saw the 20% discount) but the model left the discount out of the calculator and then overrode the calculator result in its answer (1440 -> '1200 after discount'); q08 still answered the raw 600/min; q09 still chose the 10% tier; q11 answered just 'Sunny' (lost 22C); q12 speculated instead of 'I don't know'; q13 skipped search. Abstract rules were not enough for gemma -> three worked few-shot examples in a different domain (multi-factor calculator expression, tier comparison, not-found), 'quote the calculator result', 'complete sentence with numbers/units', 'always search first'."
+
+v5:
+  prompt_file: prompts/prompt_v5.txt
+  model: gemma:latest
+  temperature: 0.0
+  top_k: 5
+  chunk_size: 500
+  max_iterations: 6
+  lenient_json: true
+  tool_error_hints: true
+  note: "Response to v4 traces. The few-shot examples fixed the discount (q05/q06 now put 0.8 in the calculator) but the model appended prose such as '(20% discount)' inside the expression, the calculator rejected it, and the model then GAVE UP ('I am unable to perform the calculation'); q08 answered '600 API calls per hour' (per-minute limit reported as per-hour). -> calculator expression grammar rule, 'on ERROR fix the arguments and retry', a per-minute->per-hour worked example, and actionable calculator error messages (tool_error_hints)."
+
+v6:
+  prompt_file: prompts/prompt_v6.txt
+  model: gemma:latest
+  temperature: 0.0
+  top_k: 5
+  chunk_size: 500
+  max_iterations: 6
+  lenient_json: true
+  tool_error_hints: true
+  note: "Response to v5 traces. q06: the calculator returned the right 1152.0 but the final answer said $1280 (model overrode the tool result); q08: never called the calculator, answered '600 requests per hour'; q09: chose the 10% tier for 98.5% without comparing. -> keyword-triggered 'you MUST call the calculator' rule, the final thought must start with 'Calculator result: <number>' and the answer must contain exactly that number, and tiers must be listed before the comparison is written. (q01's generic 'refer to the documentation' answer has no known cause yet.)"

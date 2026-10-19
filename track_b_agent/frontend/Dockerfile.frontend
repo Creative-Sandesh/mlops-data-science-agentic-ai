@@ -1,0 +1,12 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# the UI needs only streamlit + requests
+RUN uv pip install --system streamlit requests
+
+COPY frontend/ ./frontend/
+
+EXPOSE 8501
+CMD ["streamlit", "run", "frontend/app.py", "--server.port=8501", "--server.address=0.0.0.0"]

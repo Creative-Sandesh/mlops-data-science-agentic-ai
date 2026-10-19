@@ -1,0 +1,45 @@
+{
+  "scenario": "clean",
+  "checked_at": "2026-09-26T17:01:05+00:00",
+  "n_reference": 4930,
+  "n_current": 2113,
+  "drifted_columns": [],
+  "drifted_share": 0.0,
+  "injected_columns_detected": null,
+  "injected_columns_missed": null,
+  "side_effect_drifted_columns": [],
+  "target_drift": {
+    "score": 0.0113,
+    "drifted": false,
+    "churn_rate_reference": 0.2696,
+    "churn_rate_current": 0.2556
+  },
+  "custom_metrics": {
+    "mean_monthly_charges_shift": -0.391,
+    "month_to_month_churn_shift_pp": -1.923,
+    "mean_tenure_shift": 0.568
+  },
+  "failed_tests": [],
+  "model_performance": {
+    "reference": {
+      "accuracy": 0.7627,
+      "precision": 0.5379,
+      "recall": 0.8534,
+      "f1": 0.6599,
+      "roc_auc": 0.8614,
+      "predicted_churn_rate": 0.428,
+      "actual_churn_rate": 0.2698
+    },
+    "current": {
+      "accuracy": 0.7378,
+      "precision": 0.4917,
+      "recall": 0.7667,
+      "f1": 0.5991,
+      "roc_auc": 0.8331,
+      "predicted_churn_rate": 0.3985,
+      "actual_churn_rate": 0.2556
+    }
+  },
+  "retrain_recommended": false,
+  "reasons": []
+}

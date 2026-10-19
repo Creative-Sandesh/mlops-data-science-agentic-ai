@@ -1,0 +1,16 @@
+{
+  "q01": "The Pro plan costs $29 per user per month.",
+  "q02": "The Enterprise plan allows 6000 API requests per minute.",
+  "q03": "The SLA guarantees 99.9% monthly uptime for the Pro plan.",
+  "q04": "Approved refunds are processed within 10 business days and returned to the original payment method.",
+  "q05": "With annual billing the Pro plan gets a 20% discount: $29 x 12 months x 0.8 = $278.40 per user per year.",
+  "q06": "Starter is $12 per user per month; with the 20% annual discount that is $9.60 per user per month, so 10 people pay 10 x 12 x 9.60 = $1,152 per year.",
+  "q07": "Extra storage costs $0.05 per GB per month, so 50 GB costs $2.50 per month.",
+  "q08": "Pro allows 600 requests per minute, so a single Pro user can make at most 600 x 60 = 36,000 API calls per hour.",
+  "q09": "If uptime falls below 99.0% the customer receives a service credit of 25% of that month's fee, so 98.5% qualifies for a 25% credit.",
+  "q10": "Starter accounts cannot choose a region; they are always hosted in US-East.",
+  "q11": "The current weather in Kathmandu is 22°C and sunny.",
+  "q12": "I don't know. The documentation does not mention a free trial of the Enterprise plan.",
+  "q13": "I don't know. The documentation does not say who the CEO of Nimbus Cloud is.",
+  "q14": "Pro email support responds within 8 business hours (Monday to Friday, 09:00 to 18:00 UTC)."
+}

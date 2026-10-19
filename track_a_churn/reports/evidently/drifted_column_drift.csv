@@ -1,0 +1,20 @@
+column,method,score,threshold,drifted
+SeniorCitizen,Jensen-Shannon distance,0.019792500468044653,0.1,False
+tenure,Wasserstein distance (normed),0.5232219060818178,0.1,True
+MonthlyCharges,Wasserstein distance (normed),0.6540855976611778,0.1,True
+TotalCharges,Wasserstein distance (normed),0.16734823559386672,0.1,True
+gender,Jensen-Shannon distance,0.015441313177901308,0.1,False
+Partner,Jensen-Shannon distance,0.04718008070212017,0.1,False
+Dependents,Jensen-Shannon distance,0.04578563136408751,0.1,False
+PhoneService,Jensen-Shannon distance,0.013216553721133775,0.1,False
+MultipleLines,Jensen-Shannon distance,0.014599748601164864,0.1,False
+InternetService,Jensen-Shannon distance,0.0231856183980709,0.1,False
+OnlineSecurity,Jensen-Shannon distance,0.0543356290801886,0.1,False
+OnlineBackup,Jensen-Shannon distance,0.031097100297825093,0.1,False
+DeviceProtection,Jensen-Shannon distance,0.05641047017510691,0.1,False
+TechSupport,Jensen-Shannon distance,0.05595648174053745,0.1,False
+StreamingTV,Jensen-Shannon distance,0.034266784292386276,0.1,False
+StreamingMovies,Jensen-Shannon distance,0.01702058752048268,0.1,False
+Contract,Jensen-Shannon distance,0.1455401350232165,0.1,True
+PaperlessBilling,Jensen-Shannon distance,0.03245755796711638,0.1,False
+PaymentMethod,Jensen-Shannon distance,0.04453561922631442,0.1,False
